@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from har.core.audio_frame import AudioFrame
+from src.har.core.audio_frame import AudioFrame
 
 class Processor(ABC):
 

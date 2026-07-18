@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 import numpy as np
+from numpy.typing import NDArray
 
 
 @dataclass(slots=True, frozen=True)
@@ -12,6 +13,6 @@ class AudioFrame:
     from PyAV internals.
     """
 
-    samples: np.ndarray
+    samples: NDArray[np.float32]
     sample_rate: int
     timestamp: float
