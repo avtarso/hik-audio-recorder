@@ -1,7 +1,5 @@
 from src.har.io.rtsp_reader import RTSPReader
 from src.har.pipeline.pipeline import Pipeline
-from src.har.processors.frame_inspector import FrameInspector
-from src.har.processors.acoustic_profiler import AcousticProfiler
 from src.har.processors.csv_recorder import CsvRecorder
 
 URL = "rtsp://admin:1qaz2wsx@192.168.0.103:554/Streaming/Channels/102"
