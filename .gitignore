@@ -1,0 +1,15 @@
+hic/
+__pycache__/
+*.pyc
+
+logs/
+recordings/
+
+*.db
+*.sqlite
+*.sqlite3
+
+.idea/
+.vscode/
+
+.env
