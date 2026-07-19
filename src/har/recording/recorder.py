@@ -29,6 +29,14 @@ class Recorder:
     @property
     def is_recording(self) -> bool:
         return self._recording
+    
+    @property
+    def recorded_frames(self) -> int:
+        """
+        Number of frames currently stored
+        in active recording.
+        """
+        return len(self._frames)
 
     def push(self, frame: AudioFrame) -> None:
 
