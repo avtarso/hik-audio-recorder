@@ -1,4 +1,7 @@
 from pathlib import Path
+import os
+
+from src.har.notifications.telegram_sender import TelegramSender
 
 from src.har.session.recording_session import RecordingSession
 from src.har.session.recording_session import RecordingSession
@@ -16,6 +19,11 @@ def main():
         output_dir=Path("recordings"),
     )
 
+    sender = TelegramSender(
+        token=os.environ["HAR_TELEGRAM_TOKEN"],
+        chat_id=os.environ["HAR_TELEGRAM_CHAT_ID"],
+)
+
     print("Listening... Press Ctrl+C to stop.")
 
     try:
@@ -26,6 +34,12 @@ def main():
 
             if result.file is not None:
                 print(f"Saved: {result.file}")
+                
+                sender.send(result.file)
+
+                result.file.unlink()
+
+                print(f"Sent: {result.file.name}")
 
     except KeyboardInterrupt:
 
