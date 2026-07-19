@@ -1,4 +1,5 @@
 from src.har.dsp.event import Event
+from src.har.core.feature_frame import FeatureFrame
 
 
 class EventDetector:
@@ -36,11 +37,11 @@ class EventDetector:
 
     def update(
         self,
-        rms: float,
+        feature: FeatureFrame,
         noise_floor: float,
     ) -> Event:
 
-        loud = rms > noise_floor * self._threshold
+        loud = feature.rms > noise_floor * self._threshold
 
         if not self._active:
 
