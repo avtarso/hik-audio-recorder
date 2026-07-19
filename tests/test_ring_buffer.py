@@ -3,7 +3,7 @@ import numpy as np
 from src.har.core.audio_frame import AudioFrame
 from src.har.core.ring_buffer import RingBuffer
 
-from tests.helpers import make_frame
+from tests.helpers import make_audio_frame
 
 
 def test_ring_buffer():
@@ -13,9 +13,15 @@ def test_ring_buffer():
     assert buffer.size == 0
     assert not buffer.is_full
 
-    buffer.push(make_frame(1.0, 0.00))
-    buffer.push(make_frame(2.0, 0.04))
-    buffer.push(make_frame(3.0, 0.08))
+    buffer.push(make_audio_frame(
+        value=1.0, 
+        timestamp=0.00))
+    buffer.push(make_audio_frame(
+        value=2.0, 
+        timestamp=0.04))
+    buffer.push(make_audio_frame(
+        value=3.0, 
+        timestamp=0.08))
 
     assert buffer.size == 3
     assert buffer.is_full
@@ -26,7 +32,9 @@ def test_ring_buffer():
     assert frames[1].timestamp == 0.04
     assert frames[2].timestamp == 0.08
 
-    buffer.push(make_frame(4.0, 0.12))
+    buffer.push(make_audio_frame(
+        value=4.0, 
+        timestamp=0.12))
 
     assert buffer.size == 3
 

@@ -3,7 +3,8 @@ import numpy as np
 from src.har.core.audio_frame import AudioFrame
 
 
-def make_frame(
+def make_audio_frame(
+    *,
     value: float = 0.0,
     timestamp: float = 0.0,
     sample_rate: int = 8000,

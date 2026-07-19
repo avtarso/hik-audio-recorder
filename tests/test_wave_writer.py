@@ -6,15 +6,21 @@ import numpy as np
 from src.har.core.audio_frame import AudioFrame
 from src.har.io.wave_writer import WaveWriter
 
-from tests.helpers import make_frame
+from tests.helpers import make_audio_frame
 
 
 def test_wave_writer():
 
     frames = [
-        make_frame(0.2, 0.0),
-        make_frame(-0.2, 0.04),
-        make_frame(0.2, 0.08),
+        make_audio_frame(
+            value=0.2, 
+            timestamp=0.0),
+        make_audio_frame(
+            value=-0.2, 
+            timestamp=0.04),
+        make_audio_frame(
+            value=0.2, 
+            timestamp=0.08),
     ]
 
     output = Path("test.wav")

@@ -37,7 +37,7 @@ class Recorder:
         if self._recording:
             self._frames.append(frame)
 
-    def start(self) -> None:
+    def start(self, frame: AudioFrame) -> None:
 
         if self._recording:
             return
@@ -45,6 +45,8 @@ class Recorder:
         self._recording = True
 
         self._frames = self._buffer.get_all()
+
+        self._frames.append(frame)
 
     def stop(self) -> list[AudioFrame]:
 
