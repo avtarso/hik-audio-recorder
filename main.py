@@ -1,13 +1,14 @@
-from src.har.io.rtsp_reader import RTSPReader
 from src.har.pipeline.pipeline import Pipeline
 from src.har.processors.csv_recorder import CsvRecorder
+from src.har.sources.rtsp_audio_source import RtspAudioSource
+
 
 URL = "rtsp://admin:1qaz2wsx@192.168.0.103:554/Streaming/Channels/102"
 
 
 def main():
 
-    reader = RTSPReader(URL)
+    source = RtspAudioSource(URL)
 
     pipeline = Pipeline()
 
@@ -18,7 +19,7 @@ def main():
     pipeline.add(recorder)
 
     try:
-        for frame in reader:
+        for frame in source:
             pipeline.process(frame)
 
     except KeyboardInterrupt:

@@ -12,9 +12,10 @@ def test_open_stream(mock_open):
 
     source._open()
 
-    mock_open.assert_called_once()
-
     mock_open.assert_called_once_with(
-    "rtsp://camera",
-    mode="r",
-)
+        "rtsp://camera",
+        mode="r",
+        options={
+            "rtsp_transport": "tcp",
+        },
+    )

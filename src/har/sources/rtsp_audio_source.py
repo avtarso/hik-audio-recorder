@@ -38,7 +38,13 @@ class RtspAudioSource:
         container = self._open()
 
         try:
-            raise NotImplementedError
+            stream = self._audio_stream(container)
+
+            for frame in self._decoded_frames(
+                container,
+                stream,
+            ):
+                yield AudioFrame.from_av_frame(frame)
 
         finally:
             container.close()
@@ -52,6 +58,9 @@ class RtspAudioSource:
         return av.open(
             self._url,
             mode="r",
+            options={
+                "rtsp_transport": "tcp",
+            },
         )
     
 
@@ -66,3 +75,19 @@ class RtspAudioSource:
                 return stream
 
         raise RuntimeError("RTSP stream contains no audio stream")
+    
+
+    def _decoded_frames(
+        self,
+        container,
+        stream,
+    ):
+        """
+        Yield decoded PyAV audio frames.
+        """
+
+        for packet in container.demux(stream):
+
+            for frame in packet.decode():
+
+                yield frame

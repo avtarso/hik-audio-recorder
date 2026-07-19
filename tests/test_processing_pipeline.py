@@ -1,7 +1,7 @@
 import numpy as np
 
 from src.har.core.audio_frame import AudioFrame
-from src.har.pipeline.processing_pipeline import ProcessingPipeline
+from src.har.pipeline.analysis_pipeline import AnalysisPipeline
 from src.har.pipeline.pipeline_result import PipelineResult
 
 
@@ -13,7 +13,7 @@ def test_process_returns_pipeline_result():
         timestamp=0.0,
     )
 
-    pipeline = ProcessingPipeline()
+    pipeline = AnalysisPipeline()
 
     result = pipeline.process(frame)
 

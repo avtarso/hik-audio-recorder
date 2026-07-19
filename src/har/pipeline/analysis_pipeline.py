@@ -6,7 +6,7 @@ from src.har.dsp.event_detector import EventDetector
 from src.har.pipeline.pipeline_result import PipelineResult
 
 
-class ProcessingPipeline:
+class AnalysisPipeline:
     """
     High-level DSP pipeline.
 

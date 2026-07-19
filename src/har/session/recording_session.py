@@ -5,7 +5,7 @@ from pathlib import Path
 from src.har.core.audio_frame import AudioFrame
 from src.har.dsp.event import Event
 from src.har.io.wave_writer import WaveWriter
-from src.har.pipeline.processing_pipeline import ProcessingPipeline
+from src.har.pipeline.analysis_pipeline import AnalysisPipeline
 from src.har.recording.recorder import Recorder
 from src.har.session.session_result import SessionResult
 
@@ -18,7 +18,7 @@ class RecordingSession:
 
         AudioFrame
             ↓
-        ProcessingPipeline
+        AnalysisPipeline
             ↓
         Recorder
             ↓
@@ -33,14 +33,14 @@ class RecordingSession:
     def __init__(
         self,
         output_dir: Path,
-        pipeline: ProcessingPipeline | None = None,
+        pipeline: AnalysisPipeline | None = None,
         recorder: Recorder | None = None,
         writer: WaveWriter | None = None,
     ) -> None:
 
         self._output_dir = output_dir
 
-        self._pipeline = pipeline or ProcessingPipeline()
+        self._pipeline = pipeline or AnalysisPipeline()
 
         self._recorder = recorder or Recorder()
 
