@@ -4,6 +4,7 @@ from src.har.core.audio_frame import AudioFrame
 from src.har.pipeline.processing_pipeline import ProcessingPipeline
 from src.har.recording.recorder import Recorder
 from src.har.dsp.event import Event
+from src.har.io.wave_writer import WaveWriter
 
 
 class RecordingSession:
@@ -13,6 +14,7 @@ class RecordingSession:
         output_dir: Path,
         pipeline: ProcessingPipeline | None = None,
         recorder: Recorder | None = None,
+        writer: WaveWriter | None = None,
     ):
 
         self._output_dir = output_dir
@@ -20,6 +22,10 @@ class RecordingSession:
         self._pipeline = pipeline or ProcessingPipeline()
 
         self._recorder = recorder or Recorder()
+
+        self._writer = writer or WaveWriter()
+
+        self._file_counter = 0
 
     def process(
         self,
@@ -38,4 +44,16 @@ class RecordingSession:
 
         if result.event is Event.STOP:
 
-            self._recorder.stop()
+            frames = self._recorder.stop()
+
+            self._file_counter += 1
+
+            path = (
+                self._output_dir
+                / f"event_{self._file_counter:06d}.wav"
+            )
+
+            self._writer.write(
+                frames,
+                path,
+            )
